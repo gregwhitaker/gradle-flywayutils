@@ -1,5 +1,5 @@
 # gradle-flywayutils
-Gradle plugin that provides utilities for working Flyway migrations.
+Gradle plugin that provides utilities for working with Flyway migrations.
 
 ## License
 Copyright 2021 Greg Whitaker

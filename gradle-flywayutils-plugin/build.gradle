@@ -1,0 +1,108 @@
+plugins {
+    id "idea"
+    id "groovy"
+    id "java-gradle-plugin"
+    id "com.gradle.plugin-publish"      version "0.12.0"
+    id "org.asciidoctor.jvm.convert"    version "3.1.0"
+    id "com.github.hierynomus.license"  version "0.15.0"
+    id "org.unbroken-dome.test-sets"    version "3.0.1"
+    id "com.adarshr.test-logger"        version "2.1.0"
+}
+
+// Project Configuration
+project.group           = "com.github.gregwhitaker.flywayutils"
+project.version         = "0.1.0"
+project.description     = "Gradle plugin for interacting with mock AWS endpoints using LocalStack"
+
+project.ext.name        = "gradle-flywayutils-plugin"
+project.ext.pluginId    = "com.github.gregwhitaker.flywayutils"
+project.ext.scm         = "scm:git@github.com/gregwhitaker/gradle-flywayutils.git"
+project.ext.url         = "https://github.com/gregwhitaker/gradle-flywayutils.git"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    gradleApi()
+
+    testImplementation gradleTestKit()
+    testImplementation("org.spockframework:spock-core:1.1-groovy-2.4") {
+        exclude module: "groovy-all"
+    }
+}
+
+// Tests
+testSets {
+    funcTest
+}
+
+// Publishing
+gradlePlugin {
+    testSourceSets sourceSets.funcTest
+
+    plugins {
+        localstackPlugin {
+            id = pluginId
+            displayName = project.ext.name
+            description = project.description
+            implementationClass = "com.github.gregwhitaker.flywayutils.FlywayUtilsPlugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/gregwhitaker/gradle-flywayutils"
+    vcsUrl  = project.ext.url
+    tags    = [ "flyway", "database-migration" ]
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// Documentation
+asciidoctor {
+    baseDirFollowsSourceDir()
+    version = project.version
+    sourceDir = file("src/docs/asciidoc")
+    attributes = [
+        "toc": "left",
+        "source-highlighter": "prettify",
+        "icons": "font",
+        "numbered": "",
+        "idprefix": "",
+        "docinfo1": "true",
+        "sectanchors": "true",
+        "samplesCodeDir": file("src/docs/samples")
+    ]
+}
+
+task buildDocSite(type: Copy) {
+    group('Documentation')
+    description('Builds the documentation website for the plugin.')
+    dependsOn('build', 'cleanDocSite', 'asciidoctor')
+    destinationDir = file("../docs")
+
+    from ("${buildDir}/docs/asciidoc") {
+        include "index.html"
+    }
+
+    from ("${buildDir}/docs/javadoc") {
+        into "javadoc"
+    }
+}
+
+task cleanDocSite(type: Delete) {
+    group('Documentation')
+    description('Deletes the documentation website for the plugin.')
+    delete "docsite"
+}
+
+// Licensing
+license {
+    header rootProject.file('codequality/LICENSE_HEADER')
+    strictCheck true
+    excludes([ "**/*.json", "**/*.yml", "**/*.yaml", "**/*.properties", "**/*.html", "**/*.js", "**/*.css",  "**/*.map"])
+}

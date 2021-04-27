@@ -3,10 +3,33 @@ package com.github.gregwhitaker.flywayutils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
+/**
+ * Plugin that adds helpful utilities for working with Flyway database migrations.
+ */
 public class FlywayUtilsPlugin implements Plugin<Project> {
+    public static final String GROUP_NAME = "Database Migration Utils";
 
     @Override
     public void apply(Project project) {
+        loadModules(project);
+        project.afterEvaluate(this::loadDependencies);
+    }
 
+    /**
+     * Loads the modules containing tasks and configuration for this plugin.
+     *
+     * @param project gradle project
+     */
+    private void loadModules(Project project) {
+        FlywayUtilsModule.load(project);
+    }
+
+    /**
+     *
+     * @param project gradle project
+     */
+    private void loadDependencies(Project project) {
+        project.getConfigurations().getByName("implementation").getDependencies()
+            .add(project.getDependencies().create("org.flywaydb:flyway-core:6.0.8"));
     }
 }

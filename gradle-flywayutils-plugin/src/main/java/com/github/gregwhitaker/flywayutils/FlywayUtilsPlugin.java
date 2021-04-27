@@ -40,6 +40,7 @@ public class FlywayUtilsPlugin implements Plugin<Project> {
     }
 
     /**
+     * Adds dependencies required by this plugin to the project.
      *
      * @param project gradle project
      */

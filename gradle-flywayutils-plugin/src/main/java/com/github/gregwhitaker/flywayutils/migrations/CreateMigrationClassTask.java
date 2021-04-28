@@ -51,7 +51,7 @@ public class CreateMigrationClassTask extends DefaultTask {
     private String type;
 
     @Input
-    private String ver;
+    private String version;
 
     @Input
     private String desc;
@@ -60,14 +60,19 @@ public class CreateMigrationClassTask extends DefaultTask {
     @Input
     private String env;
 
+    public CreateMigrationClassTask() {
+        setGroup(FlywayUtilsPlugin.GROUP_NAME);
+        setDescription("Creates a new Flyway migration Java class with standard naming convention.");
+    }
+
     @TaskAction
     public void run() {
         validateType(type);
-        validateVersion(ver);
+        validateVersion(version);
         validateDescription(desc);
         validateEnv(env);
 
-        String className = FlywayScriptName.generate(FlywayScriptName.Type.get(type), ver, desc);
+        String className = FlywayScriptName.generate(FlywayScriptName.Type.get(type), version, desc);
         className = className.substring(0, className.lastIndexOf("."));
 
         JavaFile javaFile = createJavaMigrationClass(className);
@@ -149,16 +154,6 @@ public class CreateMigrationClassTask extends DefaultTask {
             .build();
     }
 
-    @Override
-    public String getGroup() {
-        return FlywayUtilsPlugin.GROUP_NAME;
-    }
-
-    @Override
-    public String getDescription() {
-        return "Creates a new Flyway migration Java class with standard naming convention.";
-    }
-
     public String getType() {
         return type;
     }
@@ -169,12 +164,12 @@ public class CreateMigrationClassTask extends DefaultTask {
     }
 
     public String getVersion() {
-        return ver;
+        return version;
     }
 
-    @Option(option = "ver", description = "Migration version")
-    public void setVersion(String ver) {
-        this.ver = ver;
+    @Option(option = "version", description = "Migration version")
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getDesc() {

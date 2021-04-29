@@ -1,3 +1,4 @@
 = Gradle FlywayUtils Plugin User Guide
 
-TBD
+include::00-intro.adoc[]
+

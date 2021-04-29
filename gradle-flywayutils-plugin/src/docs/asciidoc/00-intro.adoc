@@ -1,0 +1,5 @@
+== Introduction
+
+Gradle plugin that provides utilities for working with Flyway migrations.
+
+For detailed information on getting started with this plugin please refer to the documentation below.

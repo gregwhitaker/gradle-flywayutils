@@ -446,7 +446,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#getting_started">1.1. Getting Started</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -459,6 +463,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p>For detailed information on getting started with this plugin please refer to the documentation below.</p>
+</div>
+<div class="sect2">
+<h3 id="getting_started"><a class="anchor" href="#getting_started"></a>1.1. Getting Started</h3>
+<div class="paragraph">
+<p>The plugin can be applied with the <code>buildscript</code> syntax or the plugin DSL.</p>
+</div>
+<div class="sect3">
+<h4 id="applying_the_plugin_using_the_buildscript_syntax"><a class="anchor" href="#applying_the_plugin_using_the_buildscript_syntax"></a>1.1.1. Applying the Plugin using the Buildscript Syntax</h4>
+<div class="listingblock primary">
+<div class="title">Groovy</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath 'com.github.gregwhitaker.flywayutils:0.1.0'
+    }
+}
+
+apply plugin: 'com.github.gregwhitaker.flywayutils'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="applying_the_plugin_using_the_plugin_dsl"><a class="anchor" href="#applying_the_plugin_using_the_plugin_dsl"></a>1.1.2. Applying the Plugin using the Plugin DSL</h4>
+<div class="listingblock primary">
+<div class="title">Groovy</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
+    id "com.github.gregwhitaker.flywayutils"    version "0.1.0"
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

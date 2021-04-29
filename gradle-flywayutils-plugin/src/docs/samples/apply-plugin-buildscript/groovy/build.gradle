@@ -1,0 +1,11 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath 'com.github.gregwhitaker.flywayutils:0.1.0'
+    }
+}
+
+apply plugin: 'com.github.gregwhitaker.flywayutils'

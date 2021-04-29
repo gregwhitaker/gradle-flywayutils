@@ -51,7 +51,7 @@ public class CreateMigrationClassTask extends DefaultTask {
     private String type;
 
     @Input
-    private String version;
+    private String ver;
 
     @Input
     private String desc;
@@ -68,11 +68,11 @@ public class CreateMigrationClassTask extends DefaultTask {
     @TaskAction
     public void run() {
         validateType(type);
-        validateVersion(version);
+        validateVersion(ver);
         validateDescription(desc);
         validateEnv(env);
 
-        String className = FlywayScriptName.generate(FlywayScriptName.Type.get(type), version, desc);
+        String className = FlywayScriptName.generate(FlywayScriptName.Type.get(type), ver, desc);
         className = className.substring(0, className.lastIndexOf("."));
 
         JavaFile javaFile = createJavaMigrationClass(className);
@@ -163,13 +163,13 @@ public class CreateMigrationClassTask extends DefaultTask {
         this.type = type;
     }
 
-    public String getVersion() {
-        return version;
+    public String getVer() {
+        return ver;
     }
 
-    @Option(option = "version", description = "Migration version")
-    public void setVersion(String version) {
-        this.version = version;
+    @Option(option = "ver", description = "Migration version")
+    public void setVer(String ver) {
+        this.ver = ver;
     }
 
     public String getDesc() {

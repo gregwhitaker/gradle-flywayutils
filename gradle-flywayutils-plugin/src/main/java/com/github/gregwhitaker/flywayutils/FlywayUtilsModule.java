@@ -17,6 +17,7 @@ package com.github.gregwhitaker.flywayutils;
 
 import com.github.gregwhitaker.flywayutils.migrations.CreateMigrationClassTask;
 import com.github.gregwhitaker.flywayutils.migrations.CreateMigrationScriptTask;
+import com.github.gregwhitaker.flywayutils.migrations.InitMigrationDirectoryTask;
 import org.gradle.api.Project;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class FlywayUtilsModule {
     // Task Names
     public static final String CREATE_MIGRATION_SCRIPT_TASK_NAME = "createMigrationScript";
     public static final String CREATE_MIGRATION_CLASS_TASK_NAME = "createMigrationClass";
+    public static final String INIT_MIGRATION_DIRECTORY_TASK_NAME = "initMigrationDirectory";
 
     /**
      * Loads and configures tasks for the plugin.
@@ -39,6 +41,7 @@ public class FlywayUtilsModule {
         final Map<String, Class> tasks = new HashMap<>();
         tasks.put(CREATE_MIGRATION_SCRIPT_TASK_NAME, CreateMigrationScriptTask.class);
         tasks.put(CREATE_MIGRATION_CLASS_TASK_NAME, CreateMigrationClassTask.class);
+        tasks.put(INIT_MIGRATION_DIRECTORY_TASK_NAME, InitMigrationDirectoryTask.class);
 
         tasks.forEach((name, clazz) -> {
             // Register the default tasks with the project

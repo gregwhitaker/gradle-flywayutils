@@ -42,7 +42,7 @@ public class CreateMigrationScriptTask extends DefaultTask {
     private String type;
 
     @Input
-    private String version;
+    private String ver;
 
     @Input
     private String desc;
@@ -60,11 +60,11 @@ public class CreateMigrationScriptTask extends DefaultTask {
     public void run() {
         validateMigrationDirectories();
         validateType(type);
-        validateVersion(version);
+        validateVersion(ver);
         validateDescription(desc);
         validateEnv(env);
 
-        String scriptName = FlywayScriptName.generate(FlywayScriptName.Type.get(type), version, desc);
+        String scriptName = FlywayScriptName.generate(FlywayScriptName.Type.get(type), ver, desc);
 
         Path scriptPath;
         if (StringUtils.isBlank(env)) {
@@ -156,13 +156,13 @@ public class CreateMigrationScriptTask extends DefaultTask {
         this.type = type;
     }
 
-    public String getVersion() {
-        return version;
+    public String getVer() {
+        return ver;
     }
 
-    @Option(option = "version", description = "Migration version")
-    public void setVersion(String ver) {
-        this.version = ver;
+    @Option(option = "ver", description = "Migration version")
+    public void setVer(String ver) {
+        this.ver = ver;
     }
 
     public String getDesc() {

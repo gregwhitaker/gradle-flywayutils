@@ -54,7 +54,7 @@ public class InitMigrationDirectoryTask extends DefaultTask {
                     Files.createDirectories(path.getParent());
                     Files.createFile(path);
                 } catch (IOException e) {
-                    throw new GradleException("Cannot create migration directory.", e);
+                    throw new GradleException("Cannot create migration-env directory.", e);
                 }
             }
         });

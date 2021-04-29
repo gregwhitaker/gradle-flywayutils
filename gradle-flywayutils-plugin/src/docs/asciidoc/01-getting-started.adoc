@@ -1,6 +1,6 @@
 === Getting Started
 
-The plugin can be applied with the `buildscript` syntax or the plugin DSL.
+The plugin can be applied with the buildscript syntax or the plugin DSL.
 
 ==== Applying the Plugin using the Buildscript Syntax
 [source,groovy,indent=0,subs="verbatim,attributes",role="primary"]

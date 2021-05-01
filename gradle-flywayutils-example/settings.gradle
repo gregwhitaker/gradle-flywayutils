@@ -1,3 +1,18 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        maven {
+            name "GitHubPackages"
+            url "https://maven.pkg.github.com/gregwhitaker/gradle-flywayutils"
+            credentials {
+                username = rootProject.properties.get("gpr.user") as String ?: System.getenv("USERNAME")
+                password = rootProject.properties.get("gpr.key") as String ?: System.getenv("TOKEN")
+            }
+        }
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = 'gradle-flywayutils-example'
 
 includeBuild '../gradle-flywayutils-plugin'
